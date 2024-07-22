@@ -26,11 +26,7 @@ public class ExcelExporter {
         try {
             return getByteArray(
                     new ExcelSheetWriter()
-                            .create(
-                                    simpleExcelFile.getHeader(),
-                                    simpleExcelFile.getLines(),
-                                    simpleExcelFile.getFormatters(),
-                                    simpleExcelFile.getSheetName()));
+                            .create(simpleExcelFile));
         } catch (Exception e) {
             e.printStackTrace();
             return "Erro ao gerar o Arquivo em Excel.".getBytes(StandardCharsets.ISO_8859_1);

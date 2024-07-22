@@ -15,6 +15,7 @@ import com.easyexcel.beans.ExcelCell;
 import com.easyexcel.beans.ExcelFile;
 import com.easyexcel.beans.ExcelRow;
 import com.easyexcel.beans.ExcelSheet;
+import com.easyexcel.beans.SimpleExcelFile;
 import com.easyexcel.enums.CustomCellFormat;
 import com.easyexcel.strategies.CellValueContext;
 import com.easyexcel.utils.ExcelCellFactory;
@@ -35,8 +36,12 @@ public class ExcelSheetWriter {
         return workbook;
     }
 
-    public Workbook create(List<String> header, List<Object[]> lines, List<CustomCellFormat> formatters,
-            String sheetName) {
+    public Workbook create(SimpleExcelFile simpleExcelFile) {
+        String sheetName = simpleExcelFile.getSheetName();
+        List<String> header = simpleExcelFile.getHeader();
+        List<Object[]> lines = simpleExcelFile.getLines();
+        List<CustomCellFormat> formatters = simpleExcelFile.getFormatters();
+
         SXSSFSheet sheet = workbook.createSheet(sheetName == null || sheetName.trim().isEmpty() ? "Plan1" : sheetName);
         Row headerRow = sheet.createRow(0);
         IntStream.range(0, header.size()).forEach(cellIndex -> {
